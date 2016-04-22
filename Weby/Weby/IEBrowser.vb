@@ -36,7 +36,7 @@ Public Class IEBrowser
 
     End Sub
     Private Sub Document_onmouseover(ByVal e As mshtml.IHTMLEventObj)
-        If objweby.Button1.Text = "Stop Spy" Then
+        If objweby.btnspy.Text = "Stop Spy" Then
             Dim frameName As String
             Dim frameId As String
             Dim frameUniqueId As String
@@ -74,15 +74,15 @@ Public Class IEBrowser
         Return True
     End Function
     Private Function Document_oncontextmenu(ByVal e As mshtml.IHTMLEventObj) As Boolean
-        If objweby.Button1.Text = "Stop Spy" Then
-            objweby.addItemtoTree("ram")
+        If objweby.btnspy.Text = "Stop Spy" Then
+            objweby.addItemtoTree(objweby.txttag.Text() + "_" + InputBox("Please Enter the Object Name"))
             Return False
         Else
             Return True
         End If
     End Function
     Private Sub Document_onmouseout(ByVal e As mshtml.IHTMLEventObj)
-        If objweby.Button1.Text = "Stop Spy" Then
+        If objweby.btnspy.Text = "Stop Spy" Then
             If Not objprevelement Is Nothing Then
                 objprevelement.style.setAttribute("border", "solid 0px #000000")
                 objprevelement = objcurelement

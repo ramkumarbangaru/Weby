@@ -30,11 +30,17 @@
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Button1.Text = "Spy" Then
-            Button1.Text = "Stop Spy"
+
+
+    Private Sub treeobjectmap_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles treeobjectmap.AfterSelect
+
+    End Sub
+
+    Private Sub btnspy_Click(sender As Object, e As EventArgs) Handles btnspy.Click
+        If btnspy.Text = "Spy" Then
+            btnspy.Text = "Stop Spy"
         Else
-            Button1.Text = "Spy"
+            btnspy.Text = "Spy"
         End If
     End Sub
 End Class

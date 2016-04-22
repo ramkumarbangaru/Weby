@@ -56,7 +56,7 @@ Partial Class frmweby
         Me.helpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.howToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnspy = New System.Windows.Forms.Button()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
@@ -227,6 +227,7 @@ Partial Class frmweby
         '
         'treeobjectmap
         '
+        Me.treeobjectmap.LabelEdit = True
         Me.treeobjectmap.Location = New System.Drawing.Point(9, 21)
         Me.treeobjectmap.Name = "treeobjectmap"
         Me.treeobjectmap.Size = New System.Drawing.Size(311, 350)
@@ -330,21 +331,21 @@ Partial Class frmweby
         Me.aboutToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
         Me.aboutToolStripMenuItem.Text = "About"
         '
-        'Button1
+        'btnspy
         '
-        Me.Button1.Location = New System.Drawing.Point(357, 31)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(340, 26)
-        Me.Button1.TabIndex = 9
-        Me.Button1.Text = "Spy"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnspy.Location = New System.Drawing.Point(357, 31)
+        Me.btnspy.Name = "btnspy"
+        Me.btnspy.Size = New System.Drawing.Size(340, 26)
+        Me.btnspy.TabIndex = 9
+        Me.btnspy.Text = "Spy"
+        Me.btnspy.UseVisualStyleBackColor = True
         '
         'frmweby
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(722, 423)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnspy)
         Me.Controls.Add(Me.grpproperties)
         Me.Controls.Add(Me.grpObjectmap)
         Me.Controls.Add(Me.menuStrip1)
@@ -365,8 +366,6 @@ Partial Class frmweby
     Private WithEvents txtcsspath As TextBox
     Private WithEvents txtxpathabsolute As TextBox
     Private WithEvents txtxpathrelative As TextBox
-    Private WithEvents txtclass As TextBox
-    Private WithEvents txttag As TextBox
     Private WithEvents txtname As TextBox
     Private WithEvents txtid As TextBox
     Private WithEvents lblcsssubpath As Label
@@ -394,5 +393,7 @@ Partial Class frmweby
     Private WithEvents howToToolStripMenuItem As ToolStripMenuItem
     Private WithEvents aboutToolStripMenuItem As ToolStripMenuItem
     Private WithEvents treeobjectmap As TreeView
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnspy As Button
+    Private WithEvents txtclass As TextBox
+    Friend WithEvents txttag As TextBox
 End Class

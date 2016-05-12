@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmweby
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmweby
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpproperties = New System.Windows.Forms.GroupBox()
         Me.txtcsssubpath = New System.Windows.Forms.TextBox()
@@ -57,6 +57,7 @@ Partial Class frmweby
         Me.howToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnspy = New System.Windows.Forms.Button()
+        Me.btnIEWin = New System.Windows.Forms.Button()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
@@ -333,18 +334,28 @@ Partial Class frmweby
         '
         'btnspy
         '
-        Me.btnspy.Location = New System.Drawing.Point(357, 31)
+        Me.btnspy.Location = New System.Drawing.Point(532, 31)
         Me.btnspy.Name = "btnspy"
-        Me.btnspy.Size = New System.Drawing.Size(340, 26)
+        Me.btnspy.Size = New System.Drawing.Size(165, 26)
         Me.btnspy.TabIndex = 9
         Me.btnspy.Text = "Spy"
         Me.btnspy.UseVisualStyleBackColor = True
+        '
+        'btnIEWin
+        '
+        Me.btnIEWin.Location = New System.Drawing.Point(348, 31)
+        Me.btnIEWin.Name = "btnIEWin"
+        Me.btnIEWin.Size = New System.Drawing.Size(170, 26)
+        Me.btnIEWin.TabIndex = 10
+        Me.btnIEWin.Text = "Get IE Window"
+        Me.btnIEWin.UseVisualStyleBackColor = True
         '
         'frmweby
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(722, 423)
+        Me.Controls.Add(Me.btnIEWin)
         Me.Controls.Add(Me.btnspy)
         Me.Controls.Add(Me.grpproperties)
         Me.Controls.Add(Me.grpObjectmap)
@@ -396,4 +407,5 @@ Partial Class frmweby
     Friend WithEvents btnspy As Button
     Private WithEvents txtclass As TextBox
     Friend WithEvents txttag As TextBox
+    Friend WithEvents btnIEWin As Button
 End Class

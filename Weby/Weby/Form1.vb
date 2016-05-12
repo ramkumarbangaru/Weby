@@ -30,17 +30,20 @@
         End If
     End Sub
 
-
-
     Private Sub treeobjectmap_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles treeobjectmap.AfterSelect
 
     End Sub
 
     Private Sub btnspy_Click(sender As Object, e As EventArgs) Handles btnspy.Click
         If btnspy.Text = "Spy" Then
+            IE.AddHandlers()
             btnspy.Text = "Stop Spy"
         Else
             btnspy.Text = "Spy"
         End If
+    End Sub
+
+    Private Sub btnIEWin_Click(sender As Object, e As EventArgs) Handles btnIEWin.Click
+        IE.GetIEWindow()
     End Sub
 End Class

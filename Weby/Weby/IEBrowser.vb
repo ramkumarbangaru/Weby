@@ -4,6 +4,7 @@ Public Class IEBrowser
     Dim WithEvents objhtmldoc As HtmlDocument
     Dim WithEvents objframehtmldoc As HTMLDocument
     Dim WithEvents objIE As SHDocVw.InternetExplorer
+    Dim WithEvents objShellWindows As New SHDocVw.ShellWindows
 
     Dim objprevelement As IHTMLElement
     Dim strprevelementproperty As String
@@ -16,15 +17,22 @@ Public Class IEBrowser
     Dim frmhtmlhandle As Boolean
 
     Public Sub New(ByVal caller As frmweby)
-        objIE = New SHDocVw.InternetExplorer
-        objIE.Visible = True
+        GetIEWindow()
         objweby = frmweby
         htmlhandle = False
         frmhtmlhandle = False
     End Sub
-
-    Private Sub objIE_DocumentComplete(pDisp As Object, ByRef URL As Object) Handles objIE.DocumentComplete
-
+    Public Sub GetIEWindow()
+        objIE = Nothing
+        objIE = GetIE()
+        If IsNothing(objIE) Then
+            Application.Exit()
+        Else
+            htmlhandle = False
+            frmhtmlhandle = False
+        End If
+    End Sub
+    Public Sub AddHandlers()
         objhtmldoc = objIE.Document
         If htmlhandle = False Then
             AddHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
@@ -33,7 +41,10 @@ Public Class IEBrowser
             AddHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
             htmlhandle = True
         End If
+    End Sub
 
+    Private Sub objIE_DocumentComplete(pDisp As Object, ByRef URL As Object) Handles objIE.DocumentComplete
+        AddHandlers()
     End Sub
     Private Sub Document_onmouseover(ByVal e As mshtml.IHTMLEventObj)
         If objweby.btnspy.Text = "Stop Spy" Then
@@ -130,4 +141,39 @@ Public Class IEBrowser
             frmhtmlhandle = True
         End If
     End Sub
+
+    Private Function GetIE() As SHDocVw.InternetExplorer
+        Dim objIEx As SHDocVw.InternetExplorer
+        Dim objIEControls() As SHDocVw.InternetExplorer
+        Dim intcounter = 0
+
+        For Each objIEx In objShellWindows
+            If objIEx.Name = "Internet Explorer" Then
+                ReDim Preserve objIEControls(intcounter)
+                objIEControls(intcounter) = objIEx
+                intcounter = intcounter + 1
+            End If
+        Next
+
+        If intcounter = 0 Then
+            objIEx = New SHDocVw.InternetExplorer
+            objIEx.Visible = True
+            Return (objIEx)
+        ElseIf intcounter = 1 Then
+            Return (objIEControls(0))
+        Else
+            Dim strmsg As String
+            strmsg = ""
+            For i = 0 To objIEControls.Length - 1
+                strmsg = strmsg & i & ") " & objIEControls(i).LocationName & " : " & objIEControls(i).LocationURL & vbNewLine & vbCrLf
+            Next
+            Dim intInputValue = InputBox(strmsg, "Select the Browser", 0)
+            If intInputValue >= 0 And intInputValue < objIEControls.Length Then
+                Return (objIEControls(intInputValue))
+            Else
+                MsgBox("Wrong selection!!! - Quiting")
+            End If
+        End If
+        Return (Nothing)
+    End Function
 End Class

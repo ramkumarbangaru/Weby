@@ -22,6 +22,7 @@ Public Class IEBrowser
         htmlhandle = False
         frmhtmlhandle = False
     End Sub
+
     Public Sub GetIEWindow()
         objIE = Nothing
         objIE = GetIE()
@@ -86,7 +87,9 @@ Public Class IEBrowser
     End Function
     Private Function Document_oncontextmenu(ByVal e As mshtml.IHTMLEventObj) As Boolean
         If objweby.btnspy.Text = "Stop Spy" Then
-            objweby.addItemtoTree(objweby.txttag.Text() + "_" + InputBox("Please Enter the Object Name"))
+            Dim objop As ObjectProperties
+            objop = New ObjectProperties()
+            objweby.addItemtoTree(objcurelement.tagName + "_" + InputBox("Please Enter the Object Name"), objcurelement.id, objop.getElementName(objcurelement), objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
             Return False
         Else
             Return True
@@ -168,10 +171,12 @@ Public Class IEBrowser
                 strmsg = strmsg & i & ") " & objIEControls(i).LocationName & " : " & objIEControls(i).LocationURL & vbNewLine & vbCrLf
             Next
             Dim intInputValue = InputBox(strmsg, "Select the Browser", 0)
-            If intInputValue >= 0 And intInputValue < objIEControls.Length Then
-                Return (objIEControls(intInputValue))
-            Else
-                MsgBox("Wrong selection!!! - Quiting")
+            If intInputValue <> "" Then
+                If intInputValue >= 0 And intInputValue < objIEControls.Length Then
+                    Return (objIEControls(intInputValue))
+                Else
+                    MsgBox("Wrong selection!!! - Quiting")
+                End If
             End If
         End If
         Return (Nothing)

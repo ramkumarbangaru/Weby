@@ -89,7 +89,35 @@ Public Class IEBrowser
         If objweby.btnspy.Text = "Stop Spy" Then
             Dim objop As ObjectProperties
             objop = New ObjectProperties()
-            objweby.addItemtoTree(objcurelement.tagName + "_" + InputBox("Please Enter the Object Name"), objcurelement.id, objop.getElementName(objcurelement), objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
+
+            Dim ObjName As String
+            If Not (IsNothing(objcurelement.getAttribute("Value")) Or IsDBNull(objcurelement.getAttribute("Value"))) Then
+                ObjName = objcurelement.getAttribute("Value").ToString().Trim()
+            ElseIf Not (IsNothing(objcurelement.getAttribute("OuterText")) Or IsDBNull(objcurelement.getAttribute("OuterText"))) Then
+                ObjName = objcurelement.getAttribute("OuterText").ToString().Trim()
+            ElseIf Not (IsNothing(objcurelement.getAttribute("InnerText")) Or IsDBNull(objcurelement.getAttribute("InnerText"))) Then
+                ObjName = objcurelement.getAttribute("InnerText").ToString().Trim()
+            ElseIf Not (IsNothing(objcurelement.getAttribute("Alt")) Or IsDBNull(objcurelement.getAttribute("Alt"))) Then
+                ObjName = objcurelement.getAttribute("Alt").ToString().Trim()
+            ElseIf Not (IsNothing(objcurelement.getAttribute("label")) Or IsDBNull(objcurelement.getAttribute("label"))) Then
+                ObjName = objcurelement.getAttribute("label").ToString().Trim()
+            ElseIf Not (IsNothing(objcurelement.getAttribute("title")) Or IsDBNull(objcurelement.getAttribute("title"))) Then
+                ObjName = objcurelement.getAttribute("title").ToString().Trim()
+            Else
+                ObjName = InputBox("Please Enter the Object Name")
+            End If
+
+            If ObjName.Length() > 20 Then
+                ObjName = ObjName.ToString().Replace(" ", "_").Replace(",", "").Substring(0, 20)
+            Else
+                ObjName = ObjName.ToString().Replace(" ", "_").Replace(",", "")
+            End If
+
+            If Not (IsNothing(objcurelement.getAttribute("name")) Or IsDBNull(objcurelement.getAttribute("name"))) Then
+                objweby.addItemtoTree(objcurelement.tagName.ToLower() + "_" + ObjName, objcurelement.id, objcurelement.getAttribute("name"), objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
+            Else
+                objweby.addItemtoTree(objcurelement.tagName.ToLower() + "_" + ObjName, objcurelement.id, "", objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
+            End If
             Return False
         Else
             Return True

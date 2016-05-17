@@ -12,13 +12,18 @@
             objop = New ObjectProperties()
             txtid.Text = objcurelement.id
             txttag.Text = objcurelement.tagName
-            txtname.Text = objop.getElementName(objcurelement)
+            If Not (IsNothing(objcurelement.getAttribute("name")) Or IsDBNull(objcurelement.getAttribute("name"))) Then
+                txtname.Text = objcurelement.getAttribute("name")
+            Else
+                txtname.Text = ""
+            End If
+
             txtclass.Text = objcurelement.className
-            txtxpathrelative.Text = objop.getXpath(objcurelement, False)
-            txtxpathabsolute.Text = objop.getXpath(objcurelement, True)
-            txtcsspath.Text = objop.getCss(objcurelement)
-            txtcsssubpath.Text = "css=" + objop.getCssSubPath(objcurelement)
-        End If
+                txtxpathrelative.Text = objop.getXpath(objcurelement, False)
+                txtxpathabsolute.Text = objop.getXpath(objcurelement, True)
+                txtcsspath.Text = objop.getCss(objcurelement)
+                txtcsssubpath.Text = "css=" + objop.getCssSubPath(objcurelement)
+            End If
     End Sub
     Private Delegate Sub addItemtoTreeDelegate(strvar As String, strid As String, strname As String, strtagname As String, strclass As String, strxpathrelative As String, strxpathabsolute As String, strcsspath As String, strcsssubpath As String)
     Public Sub addItemtoTree(strvar As String, strid As String, strname As String, strtagname As String, strclass As String, strxpathrelative As String, strxpathabsolute As String, strcsspath As String, strcsssubpath As String)

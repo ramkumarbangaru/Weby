@@ -71,7 +71,7 @@
 
         If Not Absolute Then
             Dim elementName
-            elementName = getElementName(node)
+            elementName = node.getAttribute("name")
             If Not node.id = "" Then
                 If InStr(node.id, "-") > 0 Then
                     If UBound(Split(node.id, "-")) < 1 Then
@@ -84,7 +84,7 @@
                     REM IDs are supposed to be unique, so they are a good starting point.
                     isContinue = False
                 End If
-            ElseIf Not elementName = "" Then
+            ElseIf Not (IsNothing(elementName) Or IsDBNull(elementName)) Then
                 nodeExpr = nodeExpr + "[@name='" + elementName + "']"
                 REM IDs are supposed to be unique, so they are a good starting point.
                 isContinue = False
@@ -216,23 +216,5 @@
             current = current.parentElement
         End While
         getCss = "css=" + subpath
-    End Function
-
-    Public Function getElementName(objcurelement As mshtml.IHTMLElement) As String
-
-        On Error Resume Next
-        Dim nameTagPosition As Integer
-        Dim elementName As String
-        Dim htmlStr As String
-        htmlStr = objcurelement.outerHTML
-        htmlStr = Mid(htmlStr, 2, InStr(2, htmlStr, ">") - 2)
-        nameTagPosition = InStr(1, htmlStr, "name=")
-        If nameTagPosition > 1 Then
-            elementName = objcurelement.getAttribute("name")
-        Else
-            elementName = ""
-        End If
-
-        getElementName = elementName
     End Function
 End Class

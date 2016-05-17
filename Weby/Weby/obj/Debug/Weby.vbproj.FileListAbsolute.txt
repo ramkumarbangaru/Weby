@@ -23,3 +23,4 @@ C:\Users\rbangaru\Source\Repos\Weby\Weby\Weby\obj\Debug\Weby.vbproj.GenerateReso
 C:\Users\rbangaru\Source\Repos\Weby\Weby\Weby\obj\Debug\Weby.exe
 C:\Users\rbangaru\Source\Repos\Weby\Weby\Weby\obj\Debug\Weby.xml
 C:\Users\rbangaru\Source\Repos\Weby\Weby\Weby\obj\Debug\Weby.pdb
+C:\Users\rbangaru\Source\Repos\Weby\Weby\Weby\obj\Debug\Weby.vbprojResolveAssemblyReference.cache

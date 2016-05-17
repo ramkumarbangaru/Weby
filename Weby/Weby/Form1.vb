@@ -1,4 +1,6 @@
-﻿Public Class frmweby
+﻿Imports System.IO
+
+Public Class frmweby
     Dim IE As IEBrowser
     Private Sub frmweby_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         IE = New IEBrowser(Me)
@@ -19,11 +21,11 @@
             End If
 
             txtclass.Text = objcurelement.className
-                txtxpathrelative.Text = objop.getXpath(objcurelement, False)
-                txtxpathabsolute.Text = objop.getXpath(objcurelement, True)
-                txtcsspath.Text = objop.getCss(objcurelement)
-                txtcsssubpath.Text = "css=" + objop.getCssSubPath(objcurelement)
-            End If
+            txtxpathrelative.Text = objop.getXpath(objcurelement, False)
+            txtxpathabsolute.Text = objop.getXpath(objcurelement, True)
+            txtcsspath.Text = objop.getCss(objcurelement)
+            txtcsssubpath.Text = "css=" + objop.getCssSubPath(objcurelement)
+        End If
     End Sub
     Private Delegate Sub addItemtoTreeDelegate(strvar As String, strid As String, strname As String, strtagname As String, strclass As String, strxpathrelative As String, strxpathabsolute As String, strcsspath As String, strcsssubpath As String)
     Public Sub addItemtoTree(strvar As String, strid As String, strname As String, strtagname As String, strclass As String, strxpathrelative As String, strxpathabsolute As String, strcsspath As String, strcsssubpath As String)
@@ -69,4 +71,19 @@
         IE.GetIEWindow()
     End Sub
 
+    Private Sub CSVToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CSVToolStripMenuItem.Click
+        Dim saveFileDialog1 As New SaveFileDialog()
+        Dim webobject As TreeNode
+        saveFileDialog1.Filter = "Web Object File | *.csv"
+        saveFileDialog1.Title = "Save the object file"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            Using sw As StreamWriter = File.CreateText(saveFileDialog1.FileName)
+                sw.WriteLine("ObjectName,ID,Name,Tag,Class,Xpath - Relative,Xapth - Absolute,CSS, CSS SubPath")
+                For Each webobject In treeobjectmap.Nodes
+                    sw.WriteLine(webobject.Text + "," + webobject.Nodes(0).Text.Split(":")(1).Trim() + "," + webobject.Nodes(1).Text.Split(":")(1).Trim() + "," + webobject.Nodes(2).Text.Split(":")(1).Trim() + "," + webobject.Nodes(3).Text.Split(":")(1).Trim() + "," + webobject.Nodes(4).Text.Split(":")(1).Trim() + "," + webobject.Nodes(5).Text.Split(":")(1).Trim() + "," + webobject.Nodes(6).Text.Split(":")(1).Trim() + "," + webobject.Nodes(7).Text.Split(":")(1).Trim())
+                Next
+            End Using
+        End If
+    End Sub
 End Class

@@ -46,10 +46,7 @@ Partial Class frmweby
         Me.newToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.openToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.saveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.xMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.jSONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.javaClassToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cClassToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.exitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.configToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.configObjectLearningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -254,50 +251,32 @@ Partial Class frmweby
         'newToolStripMenuItem
         '
         Me.newToolStripMenuItem.Name = "newToolStripMenuItem"
-        Me.newToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.newToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.newToolStripMenuItem.Text = "New"
         '
         'openToolStripMenuItem
         '
         Me.openToolStripMenuItem.Name = "openToolStripMenuItem"
-        Me.openToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.openToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.openToolStripMenuItem.Text = "Open"
         '
         'saveToolStripMenuItem
         '
-        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.xMLToolStripMenuItem, Me.jSONToolStripMenuItem, Me.javaClassToolStripMenuItem, Me.cClassToolStripMenuItem})
+        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem})
         Me.saveToolStripMenuItem.Name = "saveToolStripMenuItem"
-        Me.saveToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.saveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.saveToolStripMenuItem.Text = "Save as"
         '
-        'xMLToolStripMenuItem
+        'CSVToolStripMenuItem
         '
-        Me.xMLToolStripMenuItem.Name = "xMLToolStripMenuItem"
-        Me.xMLToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
-        Me.xMLToolStripMenuItem.Text = "XML"
-        '
-        'jSONToolStripMenuItem
-        '
-        Me.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem"
-        Me.jSONToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
-        Me.jSONToolStripMenuItem.Text = "JSON"
-        '
-        'javaClassToolStripMenuItem
-        '
-        Me.javaClassToolStripMenuItem.Name = "javaClassToolStripMenuItem"
-        Me.javaClassToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
-        Me.javaClassToolStripMenuItem.Text = "Java Class"
-        '
-        'cClassToolStripMenuItem
-        '
-        Me.cClassToolStripMenuItem.Name = "cClassToolStripMenuItem"
-        Me.cClassToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
-        Me.cClassToolStripMenuItem.Text = "C# Class"
+        Me.CSVToolStripMenuItem.Name = "CSVToolStripMenuItem"
+        Me.CSVToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.CSVToolStripMenuItem.Text = "CSV"
         '
         'exitToolStripMenuItem
         '
         Me.exitToolStripMenuItem.Name = "exitToolStripMenuItem"
-        Me.exitToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.exitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.exitToolStripMenuItem.Text = "Exit"
         '
         'configToolStripMenuItem
@@ -393,10 +372,7 @@ Partial Class frmweby
     Private WithEvents newToolStripMenuItem As ToolStripMenuItem
     Private WithEvents openToolStripMenuItem As ToolStripMenuItem
     Private WithEvents saveToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents xMLToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents jSONToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents javaClassToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents cClassToolStripMenuItem As ToolStripMenuItem
+    Private WithEvents CSVToolStripMenuItem As ToolStripMenuItem
     Private WithEvents exitToolStripMenuItem As ToolStripMenuItem
     Private WithEvents configToolStripMenuItem As ToolStripMenuItem
     Private WithEvents configObjectLearningToolStripMenuItem As ToolStripMenuItem

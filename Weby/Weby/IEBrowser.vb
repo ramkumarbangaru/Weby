@@ -24,6 +24,14 @@ Public Class IEBrowser
     End Sub
 
     Public Sub GetIEWindow()
+        If htmlhandle = True Then
+            objhtmldoc = objIE.Document
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
+        End If
+
         objIE = Nothing
         objIE = GetIE()
         If IsNothing(objIE) Then

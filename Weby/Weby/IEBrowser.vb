@@ -65,9 +65,9 @@ Public Class IEBrowser
 
             If InStr(1, LCase(objcurelement.tagName), "frame") >= 1 Then
 
-                frameName = objIE.Document.parentWindow.event.srcElement.Name
-                frameId = objIE.Document.parentWindow.event.srcElement.ID
-                frameUniqueId = objIE.Document.parentWindow.event.srcElement.uniqueID
+                frameName = objcurelement.getAttribute("name")
+                frameId = objcurelement.getAttribute("ID")
+                frameUniqueId = objcurelement.getAttribute("uniqueID")
                 If frameName <> "" Then
                     Call setFrameByName(frameName)
                 ElseIf frameId <> "" Then
@@ -98,7 +98,7 @@ Public Class IEBrowser
             Dim objop As ObjectProperties
             objop = New ObjectProperties()
 
-            Dim ObjName As String
+            Dim ObjName As String = ""
             If Not (IsNothing(objcurelement.getAttribute("Value")) Or IsDBNull(objcurelement.getAttribute("Value"))) Then
                 ObjName = objcurelement.getAttribute("Value").ToString().Trim()
             ElseIf Not (IsNothing(objcurelement.getAttribute("OuterText")) Or IsDBNull(objcurelement.getAttribute("OuterText"))) Then
@@ -111,10 +111,11 @@ Public Class IEBrowser
                 ObjName = objcurelement.getAttribute("label").ToString().Trim()
             ElseIf Not (IsNothing(objcurelement.getAttribute("title")) Or IsDBNull(objcurelement.getAttribute("title"))) Then
                 ObjName = objcurelement.getAttribute("title").ToString().Trim()
-            Else
+            End If
+            If ObjName.Trim() = "" Then
                 ObjName = InputBox("Please Enter the Object Name")
             End If
-
+            ObjName = ObjName.Replace(vbCrLf, "").Replace(vbNewLine, "")
             If ObjName.Length() > 20 Then
                 ObjName = ObjName.ToString().Replace(" ", "_").Replace(",", "").Substring(0, 20)
             Else
@@ -156,7 +157,7 @@ Public Class IEBrowser
     End Sub
     Private Sub setFrameById(frameId As String)
         Dim i
-        For i = 0 To (objIE.Document.frames.Length - 1)
+        For i = 0 To objIE.Document.frames.Length - 1
             If objIE.Document.frames(i).ID = frameId Then
                 objframehtmldoc = objIE.Document.frames(i).Document
             End If

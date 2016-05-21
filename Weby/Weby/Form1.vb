@@ -1,7 +1,7 @@
 ﻿Imports System.IO
-
 Public Class frmweby
     Dim IE As IEBrowser
+    Dim FlagSaved As Boolean
     Private Sub frmweby_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         IE = New IEBrowser(Me)
     End Sub
@@ -42,6 +42,7 @@ Public Class frmweby
             currnode.Nodes.Add("CSS Path : " & strcsspath)
             currnode.Nodes.Add("CSS Sub path : " & strcsssubpath)
         End If
+        FlagSaved = False
     End Sub
 
     Private Sub treeobjectmap_NodeMouseClick(ByVal sender As Object,
@@ -84,6 +85,7 @@ Public Class frmweby
                     sw.WriteLine(webobject.Text + "," + webobject.Nodes(0).Text.Split(":")(1).Trim() + "," + webobject.Nodes(1).Text.Split(":")(1).Trim() + "," + webobject.Nodes(2).Text.Split(":")(1).Trim() + "," + webobject.Nodes(3).Text.Split(":")(1).Trim() + "," + webobject.Nodes(4).Text.Split(":")(1).Trim() + "," + webobject.Nodes(5).Text.Split(":")(1).Trim() + "," + webobject.Nodes(6).Text.Split(":")(1).Trim() + "," + webobject.Nodes(7).Text.Split(":")(1).Trim())
                 Next
             End Using
+            FlagSaved = True
         End If
     End Sub
 
@@ -114,6 +116,83 @@ Public Class frmweby
                 Next
                 sw.WriteLine(vbNewLine & "}")
             End Using
+            FlagSaved = True
+        End If
+    End Sub
+
+    Private Sub exitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles exitToolStripMenuItem.Click
+        If FlagSaved = False Then
+            If MsgBox("Do you want to save unsaved changes?", vbYesNo, "Weby") = MsgBoxResult.No Then
+                Application.Exit()
+            End If
+        Else
+            Application.Exit()
+        End If
+    End Sub
+    Private Sub frmby_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        If FlagSaved = False Then
+            If MsgBox("Do you want to save unsaved changes?", vbYesNo, "Weby") = MsgBoxResult.Yes Then
+                e.Cancel = True
+            End If
+        End If
+    End Sub
+
+    Private Sub newToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles newToolStripMenuItem.Click
+        If FlagSaved = False Then
+            If MsgBox("Do you want to save unsaved changes?", vbYesNo, "Weby") = MsgBoxResult.No Then
+                treeobjectmap.Nodes.Clear()
+                FlagSaved = True
+            End If
+        Else
+            treeobjectmap.Nodes.Clear()
+            FlagSaved = True
+        End If
+    End Sub
+
+    Private Sub openToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles openToolStripMenuItem.Click
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Web Object File | *csv;*.java"
+        openFileDialog.Title = "Select the object file to open"
+        openFileDialog.ShowDialog()
+        Dim strFilename = openFileDialog.FileName
+        If strFilename <> "" Then
+            Dim strFileExtension = strFilename.Substring(InStrRev(strFilename, "."))
+            Dim strcurrentline
+            Using reader As StreamReader = New StreamReader(openFileDialog.FileName)
+                strcurrentline = reader.ReadLine()
+                Do While (Not strcurrentline Is Nothing)
+                    If strFileExtension.ToLower() = "csv" Then
+                        If Not (strcurrentline.ToString().Contains("ObjectName") And strcurrentline.ToString().Contains("Xpath")) Then 'First line  check
+                            Dim flds
+                            flds = strcurrentline.ToString().Split(",")
+                            addItemtoTree(flds(0), flds(1), flds(2), flds(3), flds(4), flds(5), flds(6), flds(7), flds(8))
+                        End If
+                    ElseIf strFileExtension.ToLower() = "java" Then
+                        If strcurrentline.ToString().Contains("FindBy(") Then
+                            Dim flds = strcurrentline.ToString().Split("(")(1).Split(")")(0)
+                            Dim locatortype = flds.Substring(0, InStr(flds, "=") - 1)
+                            Dim lovatorvalue = flds.Substring(InStr(flds, "="))
+                            Dim strsubline = reader.ReadLine()
+                            While Not (strsubline.ToString().Contains("WebElement") Or strsubline Is Nothing)
+                                strsubline = reader.ReadLine()
+                            End While
+                            If strsubline Is Nothing Then
+                                Exit Do
+                            End If
+                            If strsubline.ToString().Contains("WebElement") Then
+                                If locatortype.Trim() = "id" Then
+                                    addItemtoTree(strsubline.ToString().Split(" ")(1).Split(";")(0), lovatorvalue.Trim().Split("""")(1), "", "", "", "", "", "", "")
+                                ElseIf locatortype.Trim() = "xpath" Then
+                                    addItemtoTree(strsubline.ToString().Split(" ")(1).Split(";")(0), "", "", "", "", lovatorvalue.Trim().Replace("""", ""), "", "", "")
+                                End If
+                            End If
+                        End If
+                    End If
+                    strcurrentline = reader.ReadLine()
+                Loop
+                FlagSaved = False
+            End Using
         End If
     End Sub
 End Class
+

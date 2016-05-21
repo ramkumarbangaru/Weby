@@ -47,6 +47,7 @@ Partial Class frmweby
         Me.openToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.saveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JavaPageFactoryObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.exitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.configToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.configObjectLearningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,7 +56,6 @@ Partial Class frmweby
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnspy = New System.Windows.Forms.Button()
         Me.btnIEWin = New System.Windows.Forms.Button()
-        Me.JavaPageFactoryObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
@@ -274,6 +274,12 @@ Partial Class frmweby
         Me.CSVToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
         Me.CSVToolStripMenuItem.Text = "CSV"
         '
+        'JavaPageFactoryObjectToolStripMenuItem
+        '
+        Me.JavaPageFactoryObjectToolStripMenuItem.Name = "JavaPageFactoryObjectToolStripMenuItem"
+        Me.JavaPageFactoryObjectToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
+        Me.JavaPageFactoryObjectToolStripMenuItem.Text = "Java Page Factory Object"
+        '
         'exitToolStripMenuItem
         '
         Me.exitToolStripMenuItem.Name = "exitToolStripMenuItem"
@@ -329,12 +335,6 @@ Partial Class frmweby
         Me.btnIEWin.TabIndex = 10
         Me.btnIEWin.Text = "Get IE Window"
         Me.btnIEWin.UseVisualStyleBackColor = True
-        '
-        'JavaPageFactoryObjectToolStripMenuItem
-        '
-        Me.JavaPageFactoryObjectToolStripMenuItem.Name = "JavaPageFactoryObjectToolStripMenuItem"
-        Me.JavaPageFactoryObjectToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
-        Me.JavaPageFactoryObjectToolStripMenuItem.Text = "Java Page Factory Object"
         '
         'frmweby
         '

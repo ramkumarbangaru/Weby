@@ -86,4 +86,34 @@ Public Class frmweby
             End Using
         End If
     End Sub
+
+    Private Sub JavaPageFactoryObjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles JavaPageFactoryObjectToolStripMenuItem.Click
+        Dim saveFileDialog1 As New SaveFileDialog()
+        Dim webobject As TreeNode
+        saveFileDialog1.Filter = "Web Object File | *.java"
+        saveFileDialog1.Title = "Save the object file"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            Using sw As StreamWriter = File.CreateText(saveFileDialog1.FileName)
+                sw.WriteLine("import org.openqa.selenium.WebDriver;")
+                sw.WriteLine("import org.openqa.selenium.WebElement;")
+                sw.WriteLine("import org.openqa.selenium.support.FindBy;")
+                sw.WriteLine("import org.openqa.selenium.support.PageFactory;")
+                sw.WriteLine(vbNewLine & "public class WebObjects {")
+                sw.WriteLine(vbNewLine & vbTab & "/**")
+                sw.WriteLine(vbTab & "* All WebElements are identified by @FindBy annotation")
+                sw.WriteLine(vbTab & "*/")
+                sw.WriteLine(vbNewLine & vbTab & "WebDriver driver;")
+                For Each webobject In treeobjectmap.Nodes
+                    If webobject.Nodes(0).Text.Split(":")(1).Trim() <> "" Then
+                        sw.WriteLine(vbNewLine & vbTab & "@FindBy(id=" & """" & webobject.Nodes(0).Text.Split(":")(1).Trim() & """" & ")")
+                    Else
+                        sw.WriteLine(vbNewLine & vbTab & "@FindBy(xpath=" & """" & webobject.Nodes(4).Text.Split(":")(1).Trim() & """" & ")")
+                    End If
+                    sw.WriteLine(vbTab & "WebElement " & webobject.Text & ";")
+                Next
+                sw.WriteLine(vbNewLine & "}")
+            End Using
+        End If
+    End Sub
 End Class

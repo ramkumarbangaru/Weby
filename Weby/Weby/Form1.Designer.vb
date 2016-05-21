@@ -55,6 +55,7 @@ Partial Class frmweby
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnspy = New System.Windows.Forms.Button()
         Me.btnIEWin = New System.Windows.Forms.Button()
+        Me.JavaPageFactoryObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
@@ -262,7 +263,7 @@ Partial Class frmweby
         '
         'saveToolStripMenuItem
         '
-        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem})
+        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem, Me.JavaPageFactoryObjectToolStripMenuItem})
         Me.saveToolStripMenuItem.Name = "saveToolStripMenuItem"
         Me.saveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.saveToolStripMenuItem.Text = "Save as"
@@ -270,7 +271,7 @@ Partial Class frmweby
         'CSVToolStripMenuItem
         '
         Me.CSVToolStripMenuItem.Name = "CSVToolStripMenuItem"
-        Me.CSVToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.CSVToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
         Me.CSVToolStripMenuItem.Text = "CSV"
         '
         'exitToolStripMenuItem
@@ -329,6 +330,12 @@ Partial Class frmweby
         Me.btnIEWin.Text = "Get IE Window"
         Me.btnIEWin.UseVisualStyleBackColor = True
         '
+        'JavaPageFactoryObjectToolStripMenuItem
+        '
+        Me.JavaPageFactoryObjectToolStripMenuItem.Name = "JavaPageFactoryObjectToolStripMenuItem"
+        Me.JavaPageFactoryObjectToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
+        Me.JavaPageFactoryObjectToolStripMenuItem.Text = "Java Page Factory Object"
+        '
         'frmweby
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -384,4 +391,5 @@ Partial Class frmweby
     Private WithEvents txtclass As TextBox
     Friend WithEvents txttag As TextBox
     Friend WithEvents btnIEWin As Button
+    Friend WithEvents JavaPageFactoryObjectToolStripMenuItem As ToolStripMenuItem
 End Class

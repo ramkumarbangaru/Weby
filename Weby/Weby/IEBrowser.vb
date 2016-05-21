@@ -1,7 +1,8 @@
-﻿Imports mshtml
+﻿Imports System.Text.RegularExpressions
+Imports mshtml
 Public Class IEBrowser
     REM Declaring objects with Events
-    Dim WithEvents objhtmldoc As HtmlDocument
+    Dim WithEvents objhtmldoc As HTMLDocument
     Dim WithEvents objframehtmldoc As HTMLDocument
     Dim WithEvents objIE As SHDocVw.InternetExplorer
     Dim WithEvents objShellWindows As New SHDocVw.ShellWindows
@@ -116,10 +117,12 @@ Public Class IEBrowser
                 ObjName = InputBox("Please Enter the Object Name")
             End If
             ObjName = ObjName.Replace(vbCrLf, "").Replace(vbNewLine, "")
+            ObjName = Regex.Replace(ObjName, "[^A-Za-z0-9\-/]", "")
+
             If ObjName.Length() > 20 Then
-                ObjName = ObjName.ToString().Replace(" ", "_").Replace(",", "").Substring(0, 20)
+                ObjName = ObjName.ToString().Replace(" ", "_").Substring(0, 20)
             Else
-                ObjName = ObjName.ToString().Replace(" ", "_").Replace(",", "")
+                ObjName = ObjName.ToString().Replace(" ", "_")
             End If
 
             If Not (IsNothing(objcurelement.getAttribute("name")) Or IsDBNull(objcurelement.getAttribute("name"))) Then

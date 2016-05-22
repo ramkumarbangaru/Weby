@@ -4,6 +4,10 @@ Public Class frmweby
     Dim FlagSaved As Boolean
     Private Sub frmweby_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         IE = New IEBrowser(Me)
+        treeobjectmap.ContextMenuStrip = ContextMenuStrip2
+        For Each RootNode As TreeNode In treeobjectmap.Nodes
+            RootNode.ContextMenuStrip = ContextMenuStrip1
+        Next
     End Sub
     Private Delegate Sub setValuesDelegate(objcurelement As mshtml.IHTMLElement)
     Public Sub setValues(objcurelement As mshtml.IHTMLElement)
@@ -41,6 +45,7 @@ Public Class frmweby
             currnode.Nodes.Add("XAPTH Absolute : " & strxpathabsolute)
             currnode.Nodes.Add("CSS Path : " & strcsspath)
             currnode.Nodes.Add("CSS Sub path : " & strcsssubpath)
+            currnode.ContextMenuStrip = ContextMenuStrip1
         End If
         FlagSaved = False
     End Sub
@@ -121,6 +126,9 @@ Public Class frmweby
     End Sub
 
     Private Sub exitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles exitToolStripMenuItem.Click
+        If treeobjectmap.Nodes.Count = 0 Then
+            FlagSaved = True
+        End If
         If FlagSaved = False Then
             If MsgBox("Do you want to save unsaved changes?", vbYesNo, "Weby") = MsgBoxResult.No Then
                 Application.Exit()
@@ -130,6 +138,9 @@ Public Class frmweby
         End If
     End Sub
     Private Sub frmby_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        If treeobjectmap.Nodes.Count = 0 Then
+            FlagSaved = True
+        End If
         If FlagSaved = False Then
             If MsgBox("Do you want to save unsaved changes?", vbYesNo, "Weby") = MsgBoxResult.Yes Then
                 e.Cancel = True
@@ -151,7 +162,7 @@ Public Class frmweby
 
     Private Sub openToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles openToolStripMenuItem.Click
         Dim openFileDialog As New OpenFileDialog()
-        openFileDialog.Filter = "Web Object File | *csv;*.java"
+        openFileDialog.Filter = "Web Object File | *csv;*.java;*.py"
         openFileDialog.Title = "Select the object file to open"
         openFileDialog.ShowDialog()
         Dim strFilename = openFileDialog.FileName
@@ -180,11 +191,22 @@ Public Class frmweby
                                 Exit Do
                             End If
                             If strsubline.ToString().Contains("WebElement") Then
-                                If locatortype.Trim() = "id" Then
+                                If locatortype.Trim().ToLower() = "id" Then
                                     addItemtoTree(strsubline.ToString().Split(" ")(1).Split(";")(0), lovatorvalue.Trim().Split("""")(1), "", "", "", "", "", "", "")
-                                ElseIf locatortype.Trim() = "xpath" Then
+                                ElseIf locatortype.Trim().ToLower() = "xpath" Then
                                     addItemtoTree(strsubline.ToString().Split(" ")(1).Split(";")(0), "", "", "", "", lovatorvalue.Trim().Replace("""", ""), "", "", "")
                                 End If
+                            End If
+                        End If
+                    ElseIf strFileExtension.ToLower() = "py" Then
+                        If strcurrentline.ToString().Contains("(By.") Then
+                            Dim ObjName = strcurrentline.ToString().Split("=")(0).Trim()
+                            Dim locatortype = strcurrentline.ToString().Split(".")(1).Split(",")(0).Trim()
+                            Dim lovatorvalue = strcurrentline.ToString().Split(",")(1).Split(")")(0).Trim()
+                            If locatortype.Trim().ToLower() = "id" Then
+                                addItemtoTree(ObjName, lovatorvalue.Trim().Split("""")(1), "", "", "", "", "", "", "")
+                            ElseIf locatortype.Trim().ToLower() = "xpath" Then
+                                addItemtoTree(ObjName, "", "", "", "", lovatorvalue.Trim().Replace("""", ""), "", "", "")
                             End If
                         End If
                     End If
@@ -218,6 +240,26 @@ Public Class frmweby
                 sw.WriteLine(vbNewLine)
             End Using
             FlagSaved = True
+        End If
+    End Sub
+
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        If MsgBox("Do you want to delete this node?", vbYesNo, "Weby") = MsgBoxResult.Yes Then
+            treeobjectmap.SelectedNode.Remove()
+        End If
+    End Sub
+
+    Private Sub RenameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem.Click
+        Dim frm = InputBox("Please Enter the new Name", "Rename", treeobjectmap.SelectedNode.Text)
+        If frm.Trim() <> "" Then
+            Dim SelectedNode As TreeNode = treeobjectmap.SelectedNode
+            SelectedNode.Text = frm.Trim()
+        End If
+    End Sub
+
+    Private Sub ClearAllToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ClearAllToolStripMenuItem.Click
+        If MsgBox("Do you want to clear all the nodes?", vbYesNo, "Weby") = MsgBoxResult.Yes Then
+            treeobjectmap.Nodes.Clear()
         End If
     End Sub
 End Class

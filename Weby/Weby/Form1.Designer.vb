@@ -22,6 +22,7 @@ Partial Class frmweby
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grpproperties = New System.Windows.Forms.GroupBox()
         Me.txtcsssubpath = New System.Windows.Forms.TextBox()
         Me.txtcsspath = New System.Windows.Forms.TextBox()
@@ -55,9 +56,16 @@ Partial Class frmweby
         Me.btnspy = New System.Windows.Forms.Button()
         Me.btnIEWin = New System.Windows.Forms.Button()
         Me.PythonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RenameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ClearAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
+        Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpproperties
@@ -328,6 +336,38 @@ Partial Class frmweby
         Me.PythonToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
         Me.PythonToolStripMenuItem.Text = "Python"
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RenameToolStripMenuItem, Me.DeleteToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(139, 56)
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.DeleteToolStripMenuItem.Text = "Delete"
+        '
+        'RenameToolStripMenuItem
+        '
+        Me.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem"
+        Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.RenameToolStripMenuItem.Text = "Rename"
+        '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearAllToolStripMenuItem})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(182, 58)
+        '
+        'ClearAllToolStripMenuItem
+        '
+        Me.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem"
+        Me.ClearAllToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.ClearAllToolStripMenuItem.Text = "Clear All"
+        '
         'frmweby
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -345,6 +385,8 @@ Partial Class frmweby
         Me.grpObjectmap.ResumeLayout(False)
         Me.menuStrip1.ResumeLayout(False)
         Me.menuStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -383,4 +425,9 @@ Partial Class frmweby
     Friend WithEvents btnIEWin As Button
     Friend WithEvents JavaPageFactoryObjectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PythonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RenameToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
+    Friend WithEvents ClearAllToolStripMenuItem As ToolStripMenuItem
 End Class

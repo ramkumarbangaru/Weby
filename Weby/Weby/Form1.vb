@@ -194,5 +194,31 @@ Public Class frmweby
             End Using
         End If
     End Sub
+
+    Private Sub PythonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PythonToolStripMenuItem.Click
+        Dim saveFileDialog1 As New SaveFileDialog()
+        Dim webobject As TreeNode
+        saveFileDialog1.Filter = "Web Object File | *.py"
+        saveFileDialog1.Title = "Save the object file"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            Using sw As StreamWriter = File.CreateText(saveFileDialog1.FileName)
+                sw.WriteLine("from selenium.webdriver.common.by import By")
+                sw.WriteLine(vbNewLine & "class WebObject(object):")
+                sw.WriteLine(vbNewLine & vbTab & """""""")
+                sw.WriteLine(vbTab & "Web Elements")
+                sw.WriteLine(vbTab & """""""" & vbNewLine)
+                For Each webobject In treeobjectmap.Nodes
+                    If webobject.Nodes(0).Text.Split(":")(1).Trim() <> "" Then
+                        sw.WriteLine(vbTab & webobject.Text & " = " & "(By.ID, """ & webobject.Nodes(0).Text.Split(":")(1).Trim() & """)")
+                    Else
+                        sw.WriteLine(vbTab & webobject.Text & " = " & "(By.XPATH, """ & webobject.Nodes(4).Text.Split(":")(1).Trim() & """)")
+                    End If
+                Next
+                sw.WriteLine(vbNewLine)
+            End Using
+            FlagSaved = True
+        End If
+    End Sub
 End Class
 

@@ -54,6 +54,7 @@ Partial Class frmweby
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnspy = New System.Windows.Forms.Button()
         Me.btnIEWin = New System.Windows.Forms.Button()
+        Me.PythonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpproperties.SuspendLayout()
         Me.grpObjectmap.SuspendLayout()
         Me.menuStrip1.SuspendLayout()
@@ -261,7 +262,7 @@ Partial Class frmweby
         '
         'saveToolStripMenuItem
         '
-        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem, Me.JavaPageFactoryObjectToolStripMenuItem})
+        Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem, Me.JavaPageFactoryObjectToolStripMenuItem, Me.PythonToolStripMenuItem})
         Me.saveToolStripMenuItem.Name = "saveToolStripMenuItem"
         Me.saveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.saveToolStripMenuItem.Text = "Save as"
@@ -321,6 +322,12 @@ Partial Class frmweby
         Me.btnIEWin.Text = "Get IE Window"
         Me.btnIEWin.UseVisualStyleBackColor = True
         '
+        'PythonToolStripMenuItem
+        '
+        Me.PythonToolStripMenuItem.Name = "PythonToolStripMenuItem"
+        Me.PythonToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
+        Me.PythonToolStripMenuItem.Text = "Python"
+        '
         'frmweby
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -375,4 +382,5 @@ Partial Class frmweby
     Friend WithEvents txttag As TextBox
     Friend WithEvents btnIEWin As Button
     Friend WithEvents JavaPageFactoryObjectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PythonToolStripMenuItem As ToolStripMenuItem
 End Class

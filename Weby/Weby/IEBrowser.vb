@@ -95,46 +95,75 @@ Public Class IEBrowser
         Return True
     End Function
     Private Function Document_oncontextmenu(ByVal e As mshtml.IHTMLEventObj) As Boolean
+        objcurelement = e.srcElement
         If objweby.btnspy.Text = "Stop Spy" Then
-            Dim objop As ObjectProperties
-            objop = New ObjectProperties()
-
-            Dim ObjName As String = ""
-            If Not (IsNothing(objcurelement.getAttribute("Value")) Or IsDBNull(objcurelement.getAttribute("Value"))) Then
-                ObjName = objcurelement.getAttribute("Value").ToString().Trim()
-            ElseIf Not (IsNothing(objcurelement.getAttribute("OuterText")) Or IsDBNull(objcurelement.getAttribute("OuterText"))) Then
-                ObjName = objcurelement.getAttribute("OuterText").ToString().Trim()
-            ElseIf Not (IsNothing(objcurelement.getAttribute("InnerText")) Or IsDBNull(objcurelement.getAttribute("InnerText"))) Then
-                ObjName = objcurelement.getAttribute("InnerText").ToString().Trim()
-            ElseIf Not (IsNothing(objcurelement.getAttribute("Alt")) Or IsDBNull(objcurelement.getAttribute("Alt"))) Then
-                ObjName = objcurelement.getAttribute("Alt").ToString().Trim()
-            ElseIf Not (IsNothing(objcurelement.getAttribute("label")) Or IsDBNull(objcurelement.getAttribute("label"))) Then
-                ObjName = objcurelement.getAttribute("label").ToString().Trim()
-            ElseIf Not (IsNothing(objcurelement.getAttribute("title")) Or IsDBNull(objcurelement.getAttribute("title"))) Then
-                ObjName = objcurelement.getAttribute("title").ToString().Trim()
-            End If
-            If ObjName.Trim() = "" Then
-                ObjName = InputBox("Please Enter the Object Name")
-            End If
-            ObjName = ObjName.Replace(vbCrLf, "").Replace(vbNewLine, "")
-            ObjName = Regex.Replace(ObjName, "[^A-Za-z0-9\-/]", "")
-
-            If ObjName.Length() > 20 Then
-                ObjName = ObjName.ToString().Replace(" ", "_").Substring(0, 20)
+            If My.Computer.Keyboard.ShiftKeyDown Then
+                objhtmldoc = objIE.Document
+                GetAllElemtsfrompage(objhtmldoc)
             Else
-                ObjName = ObjName.ToString().Replace(" ", "_")
-            End If
-
-            If Not (IsNothing(objcurelement.getAttribute("name")) Or IsDBNull(objcurelement.getAttribute("name"))) Then
-                objweby.addItemtoTree(objcurelement.tagName.ToLower() + "_" + ObjName, objcurelement.id, objcurelement.getAttribute("name"), objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
-            Else
-                objweby.addItemtoTree(objcurelement.tagName.ToLower() + "_" + ObjName, objcurelement.id, "", objcurelement.tagName, objcurelement.className, objop.getXpath(objcurelement, False), objop.getXpath(objcurelement, True), objop.getCss(objcurelement), "css=" + objop.getCssSubPath(objcurelement))
+                GetAllElementProperties(objcurelement, False)
             End If
             Return False
         Else
             Return True
         End If
     End Function
+
+    Private Sub GetAllElementProperties(objelement As IHTMLElement, automationNaming As Boolean)
+        Dim objop As ObjectProperties
+        Static counter = 0
+        objop = New ObjectProperties()
+
+        Dim ObjName As String = ""
+        If Not (IsNothing(objelement.getAttribute("Value")) Or IsDBNull(objelement.getAttribute("Value"))) Then
+            ObjName = objelement.getAttribute("Value").ToString().Trim()
+        ElseIf Not (IsNothing(objelement.getAttribute("OuterText")) Or IsDBNull(objelement.getAttribute("OuterText"))) Then
+            ObjName = objelement.getAttribute("OuterText").ToString().Trim()
+        ElseIf Not (IsNothing(objelement.getAttribute("InnerText")) Or IsDBNull(objelement.getAttribute("InnerText"))) Then
+            ObjName = objelement.getAttribute("InnerText").ToString().Trim()
+        ElseIf Not (IsNothing(objelement.getAttribute("Alt")) Or IsDBNull(objelement.getAttribute("Alt"))) Then
+            ObjName = objelement.getAttribute("Alt").ToString().Trim()
+        ElseIf Not (IsNothing(objelement.getAttribute("label")) Or IsDBNull(objelement.getAttribute("label"))) Then
+            ObjName = objelement.getAttribute("label").ToString().Trim()
+        ElseIf Not (IsNothing(objelement.getAttribute("title")) Or IsDBNull(objelement.getAttribute("title"))) Then
+            ObjName = objelement.getAttribute("title").ToString().Trim()
+        End If
+        If ObjName.Trim() = "" Then
+            If automationNaming = False Then
+                ObjName = InputBox("Please Enter the Object Name")
+            Else
+                ObjName = "Objects_" & counter
+                counter = counter + 1
+            End If
+        End If
+
+        ObjName = ObjName.Replace(vbCrLf, "").Replace(vbNewLine, "")
+        ObjName = Regex.Replace(ObjName, "[^A-Za-z0-9\-/]", "")
+
+        If ObjName.Length() > 20 Then
+            ObjName = ObjName.ToString().Replace(" ", "_").Substring(0, 20)
+        Else
+            ObjName = ObjName.ToString().Replace(" ", "_")
+        End If
+
+        If Not (IsNothing(objelement.getAttribute("name")) Or IsDBNull(objelement.getAttribute("name"))) Then
+            objweby.addItemtoTree(objelement.tagName.ToLower() + "_" + ObjName, objelement.id, objelement.getAttribute("name"), objelement.tagName, objelement.className, objop.getXpath(objelement, False), objop.getXpath(objelement, True), objop.getCss(objelement), "css=" + objop.getCssSubPath(objelement))
+        Else
+            objweby.addItemtoTree(objelement.tagName.ToLower() + "_" + ObjName, objelement.id, "", objelement.tagName, objelement.className, objop.getXpath(objelement, False), objop.getXpath(objelement, True), objop.getCss(objelement), "css=" + objop.getCssSubPath(objelement))
+        End If
+    End Sub
+
+    Private Sub GetAllElemtsfrompage(objhtmldoc As HTMLDocument)
+        Dim allelements = objhtmldoc.all
+        Dim eleTagName
+        For Each element As IHTMLElement In allelements
+            eleTagName = element.tagName.ToLower()
+            If eleTagName = "input" Or eleTagName = "a" Or eleTagName = "table" Or eleTagName = "tr" Or eleTagName = "td" Or eleTagName = "button" Or eleTagName = "frame" Or eleTagName = "iframe" Or eleTagName = "select" Then
+                GetAllElementProperties(element, True)
+            End If
+        Next
+    End Sub
+
     Private Sub Document_onmouseout(ByVal e As mshtml.IHTMLEventObj)
         If objweby.btnspy.Text = "Stop Spy" Then
             If Not objprevelement Is Nothing Then

@@ -49,8 +49,6 @@ Partial Class frmweby
         Me.CSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JavaPageFactoryObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.exitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.configToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.configObjectLearningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.helpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.howToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -235,7 +233,7 @@ Partial Class frmweby
         'menuStrip1
         '
         Me.menuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.menuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.fileToolStripMenuItem, Me.configToolStripMenuItem, Me.helpToolStripMenuItem})
+        Me.menuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.fileToolStripMenuItem, Me.helpToolStripMenuItem})
         Me.menuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.menuStrip1.Name = "menuStrip1"
         Me.menuStrip1.Size = New System.Drawing.Size(722, 28)
@@ -285,19 +283,6 @@ Partial Class frmweby
         Me.exitToolStripMenuItem.Name = "exitToolStripMenuItem"
         Me.exitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.exitToolStripMenuItem.Text = "Exit"
-        '
-        'configToolStripMenuItem
-        '
-        Me.configToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.configObjectLearningToolStripMenuItem})
-        Me.configToolStripMenuItem.Name = "configToolStripMenuItem"
-        Me.configToolStripMenuItem.Size = New System.Drawing.Size(65, 24)
-        Me.configToolStripMenuItem.Text = "Config"
-        '
-        'configObjectLearningToolStripMenuItem
-        '
-        Me.configObjectLearningToolStripMenuItem.Name = "configObjectLearningToolStripMenuItem"
-        Me.configObjectLearningToolStripMenuItem.Size = New System.Drawing.Size(237, 26)
-        Me.configObjectLearningToolStripMenuItem.Text = "Config Object Learning"
         '
         'helpToolStripMenuItem
         '
@@ -381,8 +366,6 @@ Partial Class frmweby
     Private WithEvents saveToolStripMenuItem As ToolStripMenuItem
     Private WithEvents CSVToolStripMenuItem As ToolStripMenuItem
     Private WithEvents exitToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents configToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents configObjectLearningToolStripMenuItem As ToolStripMenuItem
     Private WithEvents helpToolStripMenuItem As ToolStripMenuItem
     Private WithEvents howToToolStripMenuItem As ToolStripMenuItem
     Private WithEvents aboutToolStripMenuItem As ToolStripMenuItem

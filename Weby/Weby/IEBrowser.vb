@@ -58,34 +58,15 @@ Public Class IEBrowser
     End Sub
     Private Sub Document_onmouseover(ByVal e As mshtml.IHTMLEventObj)
         If objweby.btnspy.Text = "Stop Spy" Then
-            Dim frameName As String
-            Dim frameId As String
-            Dim frameUniqueId As String
             objprevelement = Nothing
             objcurelement = e.srcElement
-
+            objhtmldoc = objIE.Document
             If InStr(1, LCase(objcurelement.tagName), "frame") >= 1 Then
-
-                frameName = objcurelement.getAttribute("name")
-                frameId = objcurelement.getAttribute("ID")
-                frameUniqueId = objcurelement.getAttribute("uniqueID")
-                If frameName <> "" Then
-                    Call setFrameByName(frameName)
-                ElseIf frameId <> "" Then
-                    Call setFrameById(frameId)
-                Else
-                    Call setFrame(objcurelement, frameUniqueId)
-                End If
+                Call setFrame(objcurelement)
             Else
-                frameName = ""
-                frameId = ""
-                frameUniqueId = ""
                 objprevelement = objcurelement
                 objcurelement.style.setAttribute("border", "solid 1px #ff0000")
-            End If
-
-            If InStr(1, LCase(objcurelement.tagName), "frameset") >= 1 Then
-                objcurelement = objcurelement.document.parentWindow.event.srcElement
+                MsgBox(objcurelement.style)
             End If
 
             Call objweby.setValues(objcurelement)
@@ -173,44 +154,13 @@ Public Class IEBrowser
         End If
     End Sub
 
-    Private Sub setFrameByName(frameName As String)
-        For i = 0 To (objIE.Document.frames.Length - 1)
-            If objIE.Document.frames(i).Name = frameName Then
-                objframehtmldoc = objIE.Document.frames(i).Document
-            End If
-        Next
+    Private Sub setFrame(objcurelement As IHTMLElement)
+        objframehtmldoc = objcurelement.document
         If frmhtmlhandle = False Then
             AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
             AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
             AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
             AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
-            frmhtmlhandle = True
-        End If
-    End Sub
-    Private Sub setFrameById(frameId As String)
-        Dim i
-        For i = 0 To objIE.Document.frames.Length - 1
-            If objIE.Document.frames(i).ID = frameId Then
-                objframehtmldoc = objIE.Document.frames(i).Document
-            End If
-        Next
-        If frmhtmlhandle = False Then
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
-            frmhtmlhandle = True
-        End If
-    End Sub
-
-    Private Sub setFrame(cur As Object, frameId As String)
-        objframehtmldoc = objIE.Document.parentWindow.event.srcElement.Document
-        If frmhtmlhandle = False Then
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
-            AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
-            frmhtmlhandle = True
         End If
     End Sub
 

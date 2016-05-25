@@ -66,7 +66,6 @@ Public Class IEBrowser
             Else
                 objprevelement = objcurelement
                 objcurelement.style.setAttribute("border", "solid 1px #ff0000")
-                MsgBox(objcurelement.style)
             End If
 
             Call objweby.setValues(objcurelement)

@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+Imports System.Threading
 Imports mshtml
 Public Class IEBrowser
     REM Declaring objects with Events
@@ -16,6 +17,7 @@ Public Class IEBrowser
     Dim objweby As frmweby
     Dim htmlhandle As Boolean
     Dim frmhtmlhandle As Boolean
+    Dim strborder
 
     Public Sub New(ByVal caller As frmweby)
         GetIEWindow()
@@ -61,16 +63,36 @@ Public Class IEBrowser
             objprevelement = Nothing
             objcurelement = e.srcElement
             objhtmldoc = objIE.Document
-            If InStr(1, LCase(objcurelement.tagName), "frame") >= 1 Then
+            If InStr(1, LCase(objcurelement.tagName), "iframe") >= 1 Then
+                Call setiFrame(objcurelement)
+            ElseIf InStr(1, LCase(objcurelement.tagName), "frame") >= 1 Then
                 Call setFrame(objcurelement)
             Else
                 objprevelement = objcurelement
-                objcurelement.style.setAttribute("border", "solid 1px #ff0000")
+                strborder = objcurelement.style.border
+                objcurelement.style.border = "solid 1px #ff0000"
+                'objcurelement.style.setAttribute("border", "solid 1px #ff0000")
             End If
 
             Call objweby.setValues(objcurelement)
         End If
     End Sub
+
+    Private Sub setiFrame(objcurelement As IHTMLElement)
+        objframehtmldoc = objcurelement.document
+        If frmhtmlhandle = False Then
+            objhtmldoc = objIE.Document
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
+            RemoveHandler CType(objhtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
+            'AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onclick, AddressOf Document_onclick
+            'AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseover, AddressOf Document_onmouseover
+            'AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).oncontextmenu, AddressOf Document_oncontextmenu
+            'AddHandler CType(objframehtmldoc, HTMLDocumentEvents2_Event).onmouseout, AddressOf Document_onmouseout
+        End If
+    End Sub
+
     Private Function Document_onclick(ByVal e As mshtml.IHTMLEventObj) As Boolean
         Return True
     End Function
@@ -147,7 +169,8 @@ Public Class IEBrowser
     Private Sub Document_onmouseout(ByVal e As mshtml.IHTMLEventObj)
         If objweby.btnspy.Text = "Stop Spy" Then
             If Not objprevelement Is Nothing Then
-                objprevelement.style.setAttribute("border", "solid 0px #000000")
+                objcurelement.style.border = strborder
+                'objprevelement.style.setAttribute("border", "solid 0px #000000")
                 objprevelement = objcurelement
             End If
         End If

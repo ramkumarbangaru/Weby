@@ -49,16 +49,16 @@ Partial Class frmweby
         Me.saveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JavaPageFactoryObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PythonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.exitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.helpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.howToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnspy = New System.Windows.Forms.Button()
         Me.btnIEWin = New System.Windows.Forms.Button()
-        Me.PythonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RenameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ClearAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpproperties.SuspendLayout()
@@ -259,20 +259,20 @@ Partial Class frmweby
         'newToolStripMenuItem
         '
         Me.newToolStripMenuItem.Name = "newToolStripMenuItem"
-        Me.newToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.newToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.newToolStripMenuItem.Text = "New"
         '
         'openToolStripMenuItem
         '
         Me.openToolStripMenuItem.Name = "openToolStripMenuItem"
-        Me.openToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.openToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.openToolStripMenuItem.Text = "Open"
         '
         'saveToolStripMenuItem
         '
         Me.saveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem, Me.JavaPageFactoryObjectToolStripMenuItem, Me.PythonToolStripMenuItem})
         Me.saveToolStripMenuItem.Name = "saveToolStripMenuItem"
-        Me.saveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.saveToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.saveToolStripMenuItem.Text = "Save as"
         '
         'CSVToolStripMenuItem
@@ -287,10 +287,16 @@ Partial Class frmweby
         Me.JavaPageFactoryObjectToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
         Me.JavaPageFactoryObjectToolStripMenuItem.Text = "Java Page Factory Object"
         '
+        'PythonToolStripMenuItem
+        '
+        Me.PythonToolStripMenuItem.Name = "PythonToolStripMenuItem"
+        Me.PythonToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
+        Me.PythonToolStripMenuItem.Text = "Python"
+        '
         'exitToolStripMenuItem
         '
         Me.exitToolStripMenuItem.Name = "exitToolStripMenuItem"
-        Me.exitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.exitToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.exitToolStripMenuItem.Text = "Exit"
         '
         'helpToolStripMenuItem
@@ -330,12 +336,6 @@ Partial Class frmweby
         Me.btnIEWin.Text = "Get IE Window"
         Me.btnIEWin.UseVisualStyleBackColor = True
         '
-        'PythonToolStripMenuItem
-        '
-        Me.PythonToolStripMenuItem.Name = "PythonToolStripMenuItem"
-        Me.PythonToolStripMenuItem.Size = New System.Drawing.Size(249, 26)
-        Me.PythonToolStripMenuItem.Text = "Python"
-        '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
@@ -343,29 +343,29 @@ Partial Class frmweby
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(139, 56)
         '
-        'DeleteToolStripMenuItem
-        '
-        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
-        Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
         'RenameToolStripMenuItem
         '
         Me.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem"
-        Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(138, 26)
         Me.RenameToolStripMenuItem.Text = "Rename"
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(138, 26)
+        Me.DeleteToolStripMenuItem.Text = "Delete"
         '
         'ContextMenuStrip2
         '
         Me.ContextMenuStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearAllToolStripMenuItem})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(182, 58)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(141, 30)
         '
         'ClearAllToolStripMenuItem
         '
         Me.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem"
-        Me.ClearAllToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.ClearAllToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
         Me.ClearAllToolStripMenuItem.Text = "Clear All"
         '
         'frmweby

@@ -14,4 +14,4 @@ Weby is another IE based web object spy tool which will learns following propert
 7) CSS
 8) CSS Sub path
 
-Weby can export the properties in CSV, TXT format (in Development)
+Weby can export the properties in CSV, Java Page object and Python file format
